@@ -1,0 +1,69 @@
+﻿@model Model.tb_file
+<div class="main-content">
+    <div class="main-content-inner">
+        <div class="page-content main-content">
+            <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+                <ul class="breadcrumb">
+                    <li>
+                        <i class="ace-icon fa fa-home home-icon"></i>
+                        <a href="/">首页</a>
+                    </li>
+                    <li>
+                        <a href="/file/fileList">文件表</a>
+                    </li>
+                    <li class="active">
+                        文件表详情
+</li>
+                </ul>
+                <!-- /.breadcrumb -->
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="widget-box">
+                        <div class="widget-header">
+                            <h4 class="widget-title">基本信息</h4>
+
+                            <div class="widget-toolbar">
+                                <a href="#" data-action="collapse">
+                                    <i class="ace-icon fa fa-chevron-up"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="widget-body" style="display: block;">
+                            <div class="widget-main">
+                                	<form action="/file/fileSave" class="form-horizontal" role="form">
+		<input type="hidden" name="id" value="@Model.id" />
+		<div class="form-group">
+			<label class="col-xs-2 control-label " >1、楼宇外貌展示图，2、楼宇详细展示图，3、楼层展示图，4、房屋展示图，5、会议室展示图，6、餐厅展示图，7、文印室展示图</label>
+			<div class="col-xs-4"><input type="text" id="typeid" name="typeid" class="col-xs-10 col-sm-10 " value="@Model.typeid"></div>
+			<label class="col-xs-2 control-label " >1：图片、2：Word、3：PPT...</label>
+			<div class="col-xs-4"><input type="text" id="filetypeid" name="filetypeid" class="col-xs-10 col-sm-10 " value="@Model.filetypeid"></div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-2 control-label " >楼宇ID、会议室ID、文印ID....</label>
+			<div class="col-xs-4"><input type="text" id="infoid" name="infoid" class="col-xs-10 col-sm-10 " value="@Model.infoid"></div>
+			<label class="col-xs-2 control-label " >文件名称</label>
+			<div class="col-xs-4"><input type="text" id="name" name="name" class="col-xs-10 col-sm-10 " value="@Model.name"></div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-2 control-label " >文件简介</label>
+			<div class="col-xs-4"><input type="text" id="intro" name="intro" class="col-xs-10 col-sm-10 " value="@Model.intro"></div>
+			<label class="col-xs-2 control-label " >文件地址</label>
+			<div class="col-xs-4"><input type="text" id="address" name="address" class="col-xs-10 col-sm-10 " value="@Model.address"></div>
+		</div>
+		<div class="clearfix form-actions"><div class="col-md-offset-5 col-md-9"><button class="btn btn-info" type="button" onclick="zstools.save()"><i class="ace-icon fa fa-check bigger-110"></i>Save（保存）</button></div></div>
+	</form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.page-content -->
+</div>
+ 

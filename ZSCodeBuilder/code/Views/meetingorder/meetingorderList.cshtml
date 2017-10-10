@@ -1,0 +1,129 @@
+﻿@using Model;
+<div class="main-content">
+    <div class="main-content-inner">
+        <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+            <ul class="breadcrumb">
+                <li>
+                    <i class="ace-icon fa fa-home home-icon"></i>
+                    <a href="/">首页</a>
+                </li>
+                <li class="active">会议服务 会议预定管理</li>
+            </ul>
+            <!-- /.breadcrumb -->
+            <!-- /.nav-search -->
+        </div>
+        <div class="page-content">
+            <!-- /放搜索控件 -->
+            <div class="col-xs-5">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="ace-icon fa fa-check"></i>
+                    </span>
+
+                    <input type="text" class="form-control search-query" id="txtkeyword" placeholder="搜索" />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-purple btn-sm" onclick="zstools.search()">
+                            <span class="ace-icon fa fa-search icon-on-right bigger-110"></span> 查询
+                        </button>
+                    </span>
+                </div>
+            </div>
+            <div class="col-xs-7">
+                <div class="input-group pull-right">
+                    <span class="input-group-btn">
+                        <a class="btn btn-success btn-sm pull-right" href="javascript:void(0)" onclick="zstools.edit('/meetingorder/meetingorderInfo')">
+                            <span class="ace-icon fa fa-pencil-square-o icon-on-right bigger-110"></span> 新增
+                        </a>
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="row">
+                        <div class="col-xs-12">
+
+                            <div class="clearfix">
+                                <div class="pull-right tableTools-container"></div>
+                            </div>
+
+
+                            <!-- div.table-responsive -->
+                            <!-- div.dataTables_borderWrap -->
+                            <div>
+                                	<table class="table table-striped table-bordered table-hover">
+		<thead>
+			<tr>
+				<th>序号</th>
+				<th>订单编号</th>
+				<th>楼宇外键</th>
+				<th>楼宇名称</th>
+				<th>会议室表外键</th>
+				<th>会议室名称</th>
+				<th>套餐表外键</th>
+				<th>套餐名称</th>
+				<th>下单用户</th>
+				<th>下单用户姓名</th>
+				<th>用户联系电话</th>
+				<th>会议人数</th>
+				<th>会议时间</th>
+				<th>上午或下午</th>
+				<th>订单状态</th>
+				<th>操作</th>
+
+			</tr>
+		</thead>
+		<tbody>
+			@{
+				var meetingorderList = ViewBag.meetingorderList as List<tb_meetingorder>;
+				 if (meetingorderList != null && meetingorderList.Count > 0)
+				{
+					for (int i = 0; i < meetingorderList.Count; i++)
+					{
+						<tr>
+							<td>@(i+1)</td>
+							<td>@meetingorderList[i].orderno</td>
+							<td>@meetingorderList[i].buildingid</td>
+							<td>@meetingorderList[i].buildingname</td>
+							<td>@meetingorderList[i].meetingroomid</td>
+							<td>@meetingorderList[i].meetingroomname</td>
+							<td>@meetingorderList[i].comboid</td>
+							<td>@meetingorderList[i].comboname</td>
+							<td>@meetingorderList[i].userid</td>
+							<td>@meetingorderList[i].username</td>
+							<td>@meetingorderList[i].userphone</td>
+							<td>@meetingorderList[i].meetingpersonnum</td>
+							<td>@meetingorderList[i].meetingdate</td>
+							<td>@meetingorderList[i].meetingAMorPM</td>
+							<td>@meetingorderList[i].status</td>
+							<td>
+								<div class="hidden-sm hidden-xs action-buttons">
+									<a class="green" href="javascript: void(0)" onclick="zstools.edit('/meetingorder/meetingorderInfo?id=@meetingorderList[i].id')" ><i class="ace-icon fa fa-pencil bigger-130"></i>编辑</a>
+									<a class="red" href="javascript: void(0)" onclick="zstools.del('/meetingorder/meetingorderDelete?id=@meetingorderList[i].id',this)" ><i class="ace-icon fa fa-trash-o bigger-130"></i>删除</a>
+								</div>
+							</td>
+						</tr>
+					}
+				}
+			}
+
+		</tbody>
+	</table>
+
+                            </div>
+
+                            <div class="modal-footer no-margin-top">
+                                @Html.Raw(ViewBag.page)
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                <!-- PAGE CONTENT ENDS -->
+            </div>
+        </div>
+
+        <!-- /.row -->
+    </div>
+    <!-- /.page-content -->
+</div>

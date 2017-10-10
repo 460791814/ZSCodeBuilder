@@ -1,0 +1,63 @@
+﻿@model Model.tb_sms
+<div class="main-content">
+    <div class="main-content-inner">
+        <div class="page-content main-content">
+            <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+                <ul class="breadcrumb">
+                    <li>
+                        <i class="ace-icon fa fa-home home-icon"></i>
+                        <a href="/">首页</a>
+                    </li>
+                    <li>
+                        <a href="/sms/smsList">手机短信验证码</a>
+                    </li>
+                    <li class="active">
+                        手机短信验证码详情
+</li>
+                </ul>
+                <!-- /.breadcrumb -->
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="widget-box">
+                        <div class="widget-header">
+                            <h4 class="widget-title">基本信息</h4>
+
+                            <div class="widget-toolbar">
+                                <a href="#" data-action="collapse">
+                                    <i class="ace-icon fa fa-chevron-up"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="widget-body" style="display: block;">
+                            <div class="widget-main">
+                                	<form action="/sms/smsSave" class="form-horizontal" role="form">
+		<input type="hidden" name="id" value="@Model.id" />
+		<div class="form-group">
+			<label class="col-xs-2 control-label " >手机号</label>
+			<div class="col-xs-4"><input type="text" id="phonenum" name="phonenum" class="col-xs-10 col-sm-10 " value="@Model.phonenum"></div>
+			<label class="col-xs-2 control-label " >验证码</label>
+			<div class="col-xs-4"><input type="text" id="verificationcode" name="verificationcode" class="col-xs-10 col-sm-10 " value="@Model.verificationcode"></div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-2 control-label " >发送时间</label>
+			<div class="col-xs-4"><input type="text" id="senddate" name="senddate" class="col-xs-10 col-sm-10 " value="@Model.senddate"></div>
+			<label class="col-xs-2 control-label " >发送短信类型</label>
+			<div class="col-xs-4"><input type="text" id="sendtype" name="sendtype" class="col-xs-10 col-sm-10 " value="@Model.sendtype"></div>
+		</div>
+		<div class="clearfix form-actions"><div class="col-md-offset-5 col-md-9"><button class="btn btn-info" type="button" onclick="zstools.save()"><i class="ace-icon fa fa-check bigger-110"></i>Save（保存）</button></div></div>
+	</form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.page-content -->
+</div>
+ 

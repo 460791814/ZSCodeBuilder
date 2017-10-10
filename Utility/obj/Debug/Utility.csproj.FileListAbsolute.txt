@@ -1,0 +1,8 @@
+D:\WB\zs\Utility\bin\Debug\Utility.dll
+D:\WB\zs\Utility\bin\Debug\Utility.pdb
+D:\WB\zs\Utility\obj\Debug\Utility.dll
+D:\WB\zs\Utility\obj\Debug\Utility.pdb
+D:\WB\ZSCodeBuilder\Utility\bin\Debug\Utility.dll
+D:\WB\ZSCodeBuilder\Utility\bin\Debug\Utility.pdb
+D:\WB\ZSCodeBuilder\Utility\obj\Debug\Utility.dll
+D:\WB\ZSCodeBuilder\Utility\obj\Debug\Utility.pdb

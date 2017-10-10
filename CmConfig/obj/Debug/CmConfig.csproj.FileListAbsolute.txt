@@ -1,0 +1,8 @@
+D:\WB\zs\CmConfig\bin\Debug\CmConfig.dll
+D:\WB\zs\CmConfig\bin\Debug\CmConfig.pdb
+D:\WB\zs\CmConfig\obj\Debug\CmConfig.dll
+D:\WB\zs\CmConfig\obj\Debug\CmConfig.pdb
+D:\WB\ZSCodeBuilder\CmConfig\bin\Debug\CmConfig.dll
+D:\WB\ZSCodeBuilder\CmConfig\bin\Debug\CmConfig.pdb
+D:\WB\ZSCodeBuilder\CmConfig\obj\Debug\CmConfig.dll
+D:\WB\ZSCodeBuilder\CmConfig\obj\Debug\CmConfig.pdb

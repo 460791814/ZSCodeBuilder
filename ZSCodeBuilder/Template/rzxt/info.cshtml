@@ -1,0 +1,47 @@
+﻿@model <#info:modelname#>
+<div class="main-content">
+    <div class="main-content-inner">
+        <div class="page-content main-content">
+            <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+                <ul class="breadcrumb">
+                    <li>
+                        <i class="ace-icon fa fa-home home-icon"></i>
+                        <a href="/">首页</a>
+                    </li>
+                    <li>
+                        <a href="<#info:listurl#>"><#info:title#></a>
+                    </li>
+                    <li class="active">
+                        <#info:title#>详情
+</li>
+                </ul>
+                <!-- /.breadcrumb -->
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="widget-box">
+                        <div class="widget-header">
+                            <h4 class="widget-title">基本信息</h4>
+
+                            <div class="widget-toolbar">
+                                <a href="#" data-action="collapse">
+                                    <i class="ace-icon fa fa-chevron-up"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="widget-body" style="display: block;">
+                            <div class="widget-main">
+                                <#info:form#>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.page-content -->
+</div>
+ 

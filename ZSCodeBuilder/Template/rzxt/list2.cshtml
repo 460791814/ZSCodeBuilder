@@ -1,0 +1,28 @@
+﻿@using Model;
+<div class="widget-main">
+    <div class="col-xs-5">
+    </div>
+    <div class="col-xs-7">
+        <div class="input-group pull-right">
+            <span class="input-group-btn">
+                <a role="button" class="btn btn-success btn-sm pull-right" onclick="zstools.edit('<#list:infourl#>')" href="javascript:void(0)">
+                    <span class="ace-icon fa fa-pencil-square-o icon-on-right bigger-110"></span> 新增
+                </a>
+            </span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+
+            <div class="clearfix">
+                <div class="pull-left tableTools-container"></div>
+            </div>
+            <div>
+                <#list:table#>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
