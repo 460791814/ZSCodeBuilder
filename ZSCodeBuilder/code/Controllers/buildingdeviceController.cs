@@ -28,26 +28,32 @@ namespace cnooc.property.manage.Controllers
 		/// <summary>
 		/// 楼宇配套设备 保存
 		/// </summary>
-		public bool buildingdeviceSave(tb_buildingdevice model)
+		public JsonResult buildingdeviceSave(tb_buildingdevice model)
 		{
 			if (model == null)
 			{
-				return false;
+				return ResultTool.jsonResult(false, "参数错误！");
 			}
 			if(!String.IsNullOrEmpty(model.id))
 			{
-				 return dbuildingdevice.Update(model);
+				bool boolResult = dbuildingdevice.Update(model);
+				return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "更新失败！");
 			}
-			model.id = Guid.NewGuid().ToString("N");
-			return dbuildingdevice.Add(model);
+			else
+			{
+				model.id = Guid.NewGuid().ToString("N");
+				bool boolResult = dbuildingdevice.Add(model);
+				return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "添加失败！");
+			}
 		}
 
 		/// <summary>
 		/// 楼宇配套设备 删除
 		/// </summary>
-		public bool buildingdeviceDelete(tb_buildingdevice model)
+		public JsonResult buildingdeviceDelete(tb_buildingdevice model)
 		{
-			return dbuildingdevice.Delete(model);
+			bool boolResult = dbuildingdevice.Delete(model);
+			return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "删除失败！");
 		}
 
 		/// <summary>

@@ -28,26 +28,32 @@ namespace cnooc.property.manage.Controllers
 		/// <summary>
 		/// 首页 推荐内容 保存
 		/// </summary>
-		public bool featureSave(tb_feature model)
+		public JsonResult featureSave(tb_feature model)
 		{
 			if (model == null)
 			{
-				return false;
+				return ResultTool.jsonResult(false, "参数错误！");
 			}
 			if(!String.IsNullOrEmpty(model.id))
 			{
-				 return dfeature.Update(model);
+				bool boolResult = dfeature.Update(model);
+				return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "更新失败！");
 			}
-			model.id = Guid.NewGuid().ToString("N");
-			return dfeature.Add(model);
+			else
+			{
+				model.id = Guid.NewGuid().ToString("N");
+				bool boolResult = dfeature.Add(model);
+				return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "添加失败！");
+			}
 		}
 
 		/// <summary>
 		/// 首页 推荐内容 删除
 		/// </summary>
-		public bool featureDelete(tb_feature model)
+		public JsonResult featureDelete(tb_feature model)
 		{
-			return dfeature.Delete(model);
+			bool boolResult = dfeature.Delete(model);
+			return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "删除失败！");
 		}
 
 		/// <summary>

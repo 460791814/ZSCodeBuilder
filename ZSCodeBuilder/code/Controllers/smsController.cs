@@ -28,26 +28,32 @@ namespace cnooc.property.manage.Controllers
 		/// <summary>
 		/// 手机短信验证码 保存
 		/// </summary>
-		public bool smsSave(tb_sms model)
+		public JsonResult smsSave(tb_sms model)
 		{
 			if (model == null)
 			{
-				return false;
+				return ResultTool.jsonResult(false, "参数错误！");
 			}
 			if(!String.IsNullOrEmpty(model.id))
 			{
-				 return dsms.Update(model);
+				bool boolResult = dsms.Update(model);
+				return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "更新失败！");
 			}
-			model.id = Guid.NewGuid().ToString("N");
-			return dsms.Add(model);
+			else
+			{
+				model.id = Guid.NewGuid().ToString("N");
+				bool boolResult = dsms.Add(model);
+				return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "添加失败！");
+			}
 		}
 
 		/// <summary>
 		/// 手机短信验证码 删除
 		/// </summary>
-		public bool smsDelete(tb_sms model)
+		public JsonResult smsDelete(tb_sms model)
 		{
-			return dsms.Delete(model);
+			bool boolResult = dsms.Delete(model);
+			return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "删除失败！");
 		}
 
 		/// <summary>

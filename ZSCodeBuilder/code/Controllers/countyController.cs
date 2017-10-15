@@ -28,26 +28,32 @@ namespace cnooc.property.manage.Controllers
 		/// <summary>
 		/// 县 保存
 		/// </summary>
-		public bool countySave(tb_county model)
+		public JsonResult countySave(tb_county model)
 		{
 			if (model == null)
 			{
-				return false;
+				return ResultTool.jsonResult(false, "参数错误！");
 			}
 			if(!String.IsNullOrEmpty(model.id))
 			{
-				 return dcounty.Update(model);
+				bool boolResult = dcounty.Update(model);
+				return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "更新失败！");
 			}
-			model.id = Guid.NewGuid().ToString("N");
-			return dcounty.Add(model);
+			else
+			{
+				model.id = Guid.NewGuid().ToString("N");
+				bool boolResult = dcounty.Add(model);
+				return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "添加失败！");
+			}
 		}
 
 		/// <summary>
 		/// 县 删除
 		/// </summary>
-		public bool countyDelete(tb_county model)
+		public JsonResult countyDelete(tb_county model)
 		{
-			return dcounty.Delete(model);
+			bool boolResult = dcounty.Delete(model);
+			return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "删除失败！");
 		}
 
 		/// <summary>

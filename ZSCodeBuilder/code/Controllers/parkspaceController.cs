@@ -28,26 +28,32 @@ namespace cnooc.property.manage.Controllers
 		/// <summary>
 		/// 各类车型车位数量 保存
 		/// </summary>
-		public bool parkspaceSave(tb_parkspace model)
+		public JsonResult parkspaceSave(tb_parkspace model)
 		{
 			if (model == null)
 			{
-				return false;
+				return ResultTool.jsonResult(false, "参数错误！");
 			}
 			if(!String.IsNullOrEmpty(model.id))
 			{
-				 return dparkspace.Update(model);
+				bool boolResult = dparkspace.Update(model);
+				return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "更新失败！");
 			}
-			model.id = Guid.NewGuid().ToString("N");
-			return dparkspace.Add(model);
+			else
+			{
+				model.id = Guid.NewGuid().ToString("N");
+				bool boolResult = dparkspace.Add(model);
+				return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "添加失败！");
+			}
 		}
 
 		/// <summary>
 		/// 各类车型车位数量 删除
 		/// </summary>
-		public bool parkspaceDelete(tb_parkspace model)
+		public JsonResult parkspaceDelete(tb_parkspace model)
 		{
-			return dparkspace.Delete(model);
+			bool boolResult = dparkspace.Delete(model);
+			return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "删除失败！");
 		}
 
 		/// <summary>

@@ -28,21 +28,32 @@ namespace cnooc.property.manage.Controllers
 		/// <summary>
 		/// 微博 保存
 		/// </summary>
-		public bool weibolicenseSave(tb_weibolicense model)
+		public JsonResult weibolicenseSave(tb_weibolicense model)
 		{
 			if (model == null)
 			{
-				return false;
+				return ResultTool.jsonResult(false, "参数错误！");
 			}
-			return dweibolicense.Add(model);
+			if(!String.IsNullOrEmpty(model.id))
+			{
+				bool boolResult = dweibolicense.Update(model);
+				return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "更新失败！");
+			}
+			else
+			{
+				model.id = Guid.NewGuid().ToString("N");
+				bool boolResult = dweibolicense.Add(model);
+				return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "添加失败！");
+			}
 		}
 
 		/// <summary>
 		/// 微博 删除
 		/// </summary>
-		public bool weibolicenseDelete(tb_weibolicense model)
+		public JsonResult weibolicenseDelete(tb_weibolicense model)
 		{
-			return dweibolicense.Delete(model);
+			bool boolResult = dweibolicense.Delete(model);
+			return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "删除失败！");
 		}
 
 		/// <summary>

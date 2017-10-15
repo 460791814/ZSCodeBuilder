@@ -28,26 +28,32 @@ namespace cnooc.property.manage.Controllers
 		/// <summary>
 		/// 操作日志 保存
 		/// </summary>
-		public bool operationlogSave(tb_operationlog model)
+		public JsonResult operationlogSave(tb_operationlog model)
 		{
 			if (model == null)
 			{
-				return false;
+				return ResultTool.jsonResult(false, "参数错误！");
 			}
 			if(!String.IsNullOrEmpty(model.id))
 			{
-				 return doperationlog.Update(model);
+				bool boolResult = doperationlog.Update(model);
+				return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "更新失败！");
 			}
-			model.id = Guid.NewGuid().ToString("N");
-			return doperationlog.Add(model);
+			else
+			{
+				model.id = Guid.NewGuid().ToString("N");
+				bool boolResult = doperationlog.Add(model);
+				return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "添加失败！");
+			}
 		}
 
 		/// <summary>
 		/// 操作日志 删除
 		/// </summary>
-		public bool operationlogDelete(tb_operationlog model)
+		public JsonResult operationlogDelete(tb_operationlog model)
 		{
-			return doperationlog.Delete(model);
+			bool boolResult = doperationlog.Delete(model);
+			return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "删除失败！");
 		}
 
 		/// <summary>

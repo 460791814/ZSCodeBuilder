@@ -28,26 +28,32 @@ namespace cnooc.property.manage.Controllers
 		/// <summary>
 		/// 权限模块关系表 保存
 		/// </summary>
-		public bool role_moduleSave(tb_role_module model)
+		public JsonResult role_moduleSave(tb_role_module model)
 		{
 			if (model == null)
 			{
-				return false;
+				return ResultTool.jsonResult(false, "参数错误！");
 			}
 			if(!String.IsNullOrEmpty(model.roleid))
 			{
-				 return drole_module.Update(model);
+				bool boolResult = drole_module.Update(model);
+				return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "更新失败！");
 			}
-			model.roleid = Guid.NewGuid().ToString("N");
-			return drole_module.Add(model);
+			else
+			{
+				model.roleid = Guid.NewGuid().ToString("N");
+				bool boolResult = drole_module.Add(model);
+				return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "添加失败！");
+			}
 		}
 
 		/// <summary>
 		/// 权限模块关系表 删除
 		/// </summary>
-		public bool role_moduleDelete(tb_role_module model)
+		public JsonResult role_moduleDelete(tb_role_module model)
 		{
-			return drole_module.Delete(model);
+			bool boolResult = drole_module.Delete(model);
+			return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "删除失败！");
 		}
 
 		/// <summary>

@@ -32,7 +32,7 @@ namespace ZSCodeBuilder.Controllers
         {
             // CreateDal();
             // CreateModel();
-            //  CreateController();
+             // CreateController();
             CreateListAndInfo();
             return View();
         }

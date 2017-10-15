@@ -28,26 +28,32 @@ namespace cnooc.property.manage.Controllers
 		/// <summary>
 		/// 家具 保存
 		/// </summary>
-		public bool roomfurnitureSave(tb_roomfurniture model)
+		public JsonResult roomfurnitureSave(tb_roomfurniture model)
 		{
 			if (model == null)
 			{
-				return false;
+				return ResultTool.jsonResult(false, "参数错误！");
 			}
 			if(!String.IsNullOrEmpty(model.id))
 			{
-				 return droomfurniture.Update(model);
+				bool boolResult = droomfurniture.Update(model);
+				return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "更新失败！");
 			}
-			model.id = Guid.NewGuid().ToString("N");
-			return droomfurniture.Add(model);
+			else
+			{
+				model.id = Guid.NewGuid().ToString("N");
+				bool boolResult = droomfurniture.Add(model);
+				return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "添加失败！");
+			}
 		}
 
 		/// <summary>
 		/// 家具 删除
 		/// </summary>
-		public bool roomfurnitureDelete(tb_roomfurniture model)
+		public JsonResult roomfurnitureDelete(tb_roomfurniture model)
 		{
-			return droomfurniture.Delete(model);
+			bool boolResult = droomfurniture.Delete(model);
+			return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "删除失败！");
 		}
 
 		/// <summary>

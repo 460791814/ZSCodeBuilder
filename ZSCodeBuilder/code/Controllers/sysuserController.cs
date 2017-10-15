@@ -28,26 +28,32 @@ namespace cnooc.property.manage.Controllers
 		/// <summary>
 		/// 系统用户 保存
 		/// </summary>
-		public bool sysuserSave(tb_sysuser model)
+		public JsonResult sysuserSave(tb_sysuser model)
 		{
 			if (model == null)
 			{
-				return false;
+				return ResultTool.jsonResult(false, "参数错误！");
 			}
 			if(!String.IsNullOrEmpty(model.id))
 			{
-				 return dsysuser.Update(model);
+				bool boolResult = dsysuser.Update(model);
+				return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "更新失败！");
 			}
-			model.id = Guid.NewGuid().ToString("N");
-			return dsysuser.Add(model);
+			else
+			{
+				model.id = Guid.NewGuid().ToString("N");
+				bool boolResult = dsysuser.Add(model);
+				return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "添加失败！");
+			}
 		}
 
 		/// <summary>
 		/// 系统用户 删除
 		/// </summary>
-		public bool sysuserDelete(tb_sysuser model)
+		public JsonResult sysuserDelete(tb_sysuser model)
 		{
-			return dsysuser.Delete(model);
+			bool boolResult = dsysuser.Delete(model);
+			return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "删除失败！");
 		}
 
 		/// <summary>

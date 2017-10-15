@@ -1,0 +1,98 @@
+﻿@using Model;
+<div class="main-content">
+    <div class="main-content-inner">
+        <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+            <ul class="breadcrumb">
+                <li>
+                    <i class="ace-icon fa fa-home home-icon"></i>
+                    <a href="/">首页</a>
+                </li>
+                <li class="active">文印室展示图</li>
+            </ul>
+            <!-- /.breadcrumb -->
+            <!-- /.nav-search -->
+        </div>
+        <div class="page-content">
+            <!-- /放搜索控件 -->
+            <div class="col-xs-5">
+                
+            </div>
+            <div class="col-xs-7">
+                <div class="input-group pull-right">
+                    <span class="input-group-btn">
+                        <a class="btn btn-success btn-sm pull-right" href="javascript:void(0)" onclick="zstools.edit('/copyroomface/copyroomfaceInfo')">
+                            <span class="ace-icon fa fa-pencil-square-o icon-on-right bigger-110"></span> 新增
+                        </a>
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="row">
+                        <div class="col-xs-12">
+
+                            <div class="clearfix">
+                                <div class="pull-right tableTools-container"></div>
+                            </div>
+
+
+                            <!-- div.table-responsive -->
+                            <!-- div.dataTables_borderWrap -->
+                            <div>
+                                	<table class="table table-striped table-bordered table-hover">
+		<thead>
+			<tr>
+				<th>序号</th>
+				<th>房间ID</th>
+				<th>文件名</th>
+				<th>文件简介</th>
+				<th>图片地址</th>
+				<th>操作</th>
+
+			</tr>
+		</thead>
+		<tbody>
+			@{
+				var copyroomfaceList = ViewBag.copyroomfaceList as List<tb_copyroomface>;
+				 if (copyroomfaceList != null && copyroomfaceList.Count > 0)
+				{
+					for (int i = 0; i < copyroomfaceList.Count; i++)
+					{
+						<tr>
+							<td>@(i+1)</td>
+							<td>@copyroomfaceList[i].copyroomid</td>
+							<td>@copyroomfaceList[i].name</td>
+							<td>@copyroomfaceList[i].intro</td>
+							<td>@copyroomfaceList[i].pic</td>
+							<td>
+								<div class="hidden-sm hidden-xs action-buttons">
+									<a class="green" href="javascript: void(0)" onclick="zstools.edit('/copyroomface/copyroomfaceInfo?id=@copyroomfaceList[i].id')" ><i class="ace-icon fa fa-pencil bigger-130"></i>编辑</a>
+									<a class="red" href="javascript: void(0)" onclick="zstools.del('/copyroomface/copyroomfaceDelete?id=@copyroomfaceList[i].id',this)" ><i class="ace-icon fa fa-trash-o bigger-130"></i>删除</a>
+								</div>
+							</td>
+						</tr>
+					}
+				}
+			}
+
+		</tbody>
+	</table>
+
+                            </div>
+
+                            <div class="modal-footer no-margin-top">
+                                @Html.Raw(ViewBag.page)
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                <!-- PAGE CONTENT ENDS -->
+            </div>
+        </div>
+
+        <!-- /.row -->
+    </div>
+    <!-- /.page-content -->
+</div>

@@ -28,26 +28,32 @@ namespace cnooc.property.manage.Controllers
 		/// <summary>
 		/// 其他配套设备设施 保存
 		/// </summary>
-		public bool roomdeviceSave(tb_roomdevice model)
+		public JsonResult roomdeviceSave(tb_roomdevice model)
 		{
 			if (model == null)
 			{
-				return false;
+				return ResultTool.jsonResult(false, "参数错误！");
 			}
 			if(!String.IsNullOrEmpty(model.id))
 			{
-				 return droomdevice.Update(model);
+				bool boolResult = droomdevice.Update(model);
+				return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "更新失败！");
 			}
-			model.id = Guid.NewGuid().ToString("N");
-			return droomdevice.Add(model);
+			else
+			{
+				model.id = Guid.NewGuid().ToString("N");
+				bool boolResult = droomdevice.Add(model);
+				return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "添加失败！");
+			}
 		}
 
 		/// <summary>
 		/// 其他配套设备设施 删除
 		/// </summary>
-		public bool roomdeviceDelete(tb_roomdevice model)
+		public JsonResult roomdeviceDelete(tb_roomdevice model)
 		{
-			return droomdevice.Delete(model);
+			bool boolResult = droomdevice.Delete(model);
+			return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "删除失败！");
 		}
 
 		/// <summary>

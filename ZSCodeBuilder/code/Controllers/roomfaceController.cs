@@ -9,13 +9,13 @@ using Comp;
 namespace cnooc.property.manage.Controllers
 {
 	/// <summary>
-	/// 楼层展示图
+	/// 房屋展示图
 	/// </summary>
 	public  class roomfaceController:Controller
 	{
 		D_roomface droomface = new D_roomface();
 		/// <summary>
-		/// 楼层展示图 列表
+		/// 房屋展示图 列表
 		/// </summary>
 		public ActionResult roomfaceList(tb_roomface model)
 		{
@@ -26,32 +26,38 @@ namespace cnooc.property.manage.Controllers
 		}
 
 		/// <summary>
-		/// 楼层展示图 保存
+		/// 房屋展示图 保存
 		/// </summary>
-		public bool roomfaceSave(tb_roomface model)
+		public JsonResult roomfaceSave(tb_roomface model)
 		{
 			if (model == null)
 			{
-				return false;
+				return ResultTool.jsonResult(false, "参数错误！");
 			}
 			if(!String.IsNullOrEmpty(model.id))
 			{
-				 return droomface.Update(model);
+				bool boolResult = droomface.Update(model);
+				return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "更新失败！");
 			}
-			model.id = Guid.NewGuid().ToString("N");
-			return droomface.Add(model);
+			else
+			{
+				model.id = Guid.NewGuid().ToString("N");
+				bool boolResult = droomface.Add(model);
+				return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "添加失败！");
+			}
 		}
 
 		/// <summary>
-		/// 楼层展示图 删除
+		/// 房屋展示图 删除
 		/// </summary>
-		public bool roomfaceDelete(tb_roomface model)
+		public JsonResult roomfaceDelete(tb_roomface model)
 		{
-			return droomface.Delete(model);
+			bool boolResult = droomface.Delete(model);
+			return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "删除失败！");
 		}
 
 		/// <summary>
-		/// 楼层展示图 详情
+		/// 房屋展示图 详情
 		/// </summary>
 		public ActionResult roomfaceInfo(tb_roomface model)
 		{

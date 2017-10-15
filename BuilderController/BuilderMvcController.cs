@@ -145,11 +145,11 @@ namespace BuilderController
             }
             stringPlus.AppendSpaceLine(2, "/// </summary>");
 
-            stringPlus.AppendSpaceLine(2, "public bool " + _actionName + "Save(" + ModelName + " model)");
+            stringPlus.AppendSpaceLine(2, "public JsonResult " + _actionName + "Save(" + ModelName + " model)");
             stringPlus.AppendSpaceLine(2, "{");
             stringPlus.AppendSpaceLine(3, "if (model == null)");
             stringPlus.AppendSpaceLine(3, "{");
-            stringPlus.AppendSpaceLine(4, "return false;");
+            stringPlus.AppendSpaceLine(4, "return ResultTool.jsonResult(false, \"参数错误！\");");
             stringPlus.AppendSpaceLine(3, "}");
             ColumnInfo primaryKeyInfo = Fieldlist.Find(a => a.IsPrimaryKey);
             if (primaryKeyInfo != null)
@@ -164,26 +164,36 @@ namespace BuilderController
                     stringPlus.AppendSpaceLine(3, "if(!String.IsNullOrEmpty(model." + columnName + "))");
                 }
                 stringPlus.AppendSpaceLine(3, "{");
-                stringPlus.AppendSpaceLine(4, " return d" + _actionName + ".Update(model);");
+                stringPlus.AppendSpaceLine(4, "bool boolResult = d" + _actionName + ".Update(model);");
+
+                stringPlus.AppendSpaceLine(4, "return ResultTool.jsonResult(boolResult, boolResult ? \"成功！\" : \"更新失败！\");");
+                
+
                 stringPlus.AppendSpaceLine(3, "}");
+                stringPlus.AppendSpaceLine(3, "else");
+                stringPlus.AppendSpaceLine(3, "{");
                 if (CodeCommon.DbTypeToCS(primaryKeyInfo.TypeName) == "int")
                 {
-                    stringPlus.AppendSpaceLine(3, "return d" + _actionName + ".Add(model)>0;");
+                    stringPlus.AppendSpaceLine(4, "bool boolResult = d" + _actionName + ".Add(model)>0;");
                 }
                 else
                 {
-                    stringPlus.AppendSpaceLine(3, "model."+ columnName + " = Guid.NewGuid().ToString(\"N\");");
-                    stringPlus.AppendSpaceLine(3, "return d" + _actionName + ".Add(model);");
+                    stringPlus.AppendSpaceLine(4, "model."+ columnName + " = Guid.NewGuid().ToString(\"N\");");
+                    stringPlus.AppendSpaceLine(4, "bool boolResult = d" + _actionName + ".Add(model);");
                 }
+                stringPlus.AppendSpaceLine(4, "return ResultTool.jsonResult(boolResult, boolResult ? \"成功！\" : \"添加失败！\");");
+                stringPlus.AppendSpaceLine(3, "}");
             }
             else {
-                stringPlus.AppendSpaceLine(3, "return d" + _actionName + ".Add(model);");
+                
+                stringPlus.AppendSpaceLine(4, "bool boolResult = d" + _actionName + ".Add(model);");
+                stringPlus.AppendSpaceLine(4, "return ResultTool.jsonResult(boolResult, boolResult ? \"成功！\" : \"添加失败！\");");
             }
          
-        
-           
-          
-         
+
+  
+
+
 
             stringPlus.AppendSpaceLine(2, "}");
             return stringPlus.ToString();
@@ -232,9 +242,12 @@ namespace BuilderController
             }
             stringPlus.AppendSpaceLine(2, "/// </summary>");
 
-            stringPlus.AppendSpaceLine(2, "public bool " + _actionName + "Delete(" + ModelName + " model)");
+            stringPlus.AppendSpaceLine(2, "public JsonResult " + _actionName + "Delete(" + ModelName + " model)");
             stringPlus.AppendSpaceLine(2, "{");
-            stringPlus.AppendSpaceLine(3, "return d"+ _actionName + ".Delete(model);");
+ 
+
+            stringPlus.AppendSpaceLine(3, "bool boolResult = d" + _actionName + ".Delete(model);");
+            stringPlus.AppendSpaceLine(3, "return ResultTool.jsonResult(boolResult, boolResult ? \"成功！\" : \"删除失败！\");");
           
 
             stringPlus.AppendSpaceLine(2, "}");

@@ -28,26 +28,32 @@ namespace cnooc.property.manage.Controllers
 		/// <summary>
 		/// 收费标准 保存
 		/// </summary>
-		public bool copyroomfeeSave(tb_copyroomfee model)
+		public JsonResult copyroomfeeSave(tb_copyroomfee model)
 		{
 			if (model == null)
 			{
-				return false;
+				return ResultTool.jsonResult(false, "参数错误！");
 			}
 			if(!String.IsNullOrEmpty(model.id))
 			{
-				 return dcopyroomfee.Update(model);
+				bool boolResult = dcopyroomfee.Update(model);
+				return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "更新失败！");
 			}
-			model.id = Guid.NewGuid().ToString("N");
-			return dcopyroomfee.Add(model);
+			else
+			{
+				model.id = Guid.NewGuid().ToString("N");
+				bool boolResult = dcopyroomfee.Add(model);
+				return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "添加失败！");
+			}
 		}
 
 		/// <summary>
 		/// 收费标准 删除
 		/// </summary>
-		public bool copyroomfeeDelete(tb_copyroomfee model)
+		public JsonResult copyroomfeeDelete(tb_copyroomfee model)
 		{
-			return dcopyroomfee.Delete(model);
+			bool boolResult = dcopyroomfee.Delete(model);
+			return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "删除失败！");
 		}
 
 		/// <summary>

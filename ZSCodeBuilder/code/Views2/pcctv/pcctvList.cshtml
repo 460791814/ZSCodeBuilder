@@ -7,7 +7,7 @@
                     <i class="ace-icon fa fa-home home-icon"></i>
                     <a href="/">首页</a>
                 </li>
-                <li class="active">省市区县</li>
+                <li class="active">各类车型车位数量</li>
             </ul>
             <!-- /.breadcrumb -->
             <!-- /.nav-search -->
@@ -15,18 +15,7 @@
         <div class="page-content">
             <!-- /放搜索控件 -->
             <div class="col-xs-5">
-                <div class="input-group">
-                    <span class="input-group-addon">
-                        <i class="ace-icon fa fa-check"></i>
-                    </span>
-
-                    <input type="text" class="form-control search-query" id="txtkeyword" placeholder="搜索" />
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-purple btn-sm" onclick="zstools.search()">
-                            <span class="ace-icon fa fa-search icon-on-right bigger-110"></span> 查询
-                        </button>
-                    </span>
-                </div>
+                
             </div>
             <div class="col-xs-7">
                 <div class="input-group pull-right">
@@ -54,7 +43,6 @@
 		<thead>
 			<tr>
 				<th>序号</th>
-				<th>名称</th>
 				<th>操作</th>
 
 			</tr>
@@ -68,7 +56,6 @@
 					{
 						<tr>
 							<td>@(i+1)</td>
-							<td>@pcctvList[i].pcctvname</td>
 							<td>
 								<div class="hidden-sm hidden-xs action-buttons">
 									<a class="green" href="javascript: void(0)" onclick="zstools.edit('/pcctv/pcctvInfo?id=@pcctvList[i].id')" ><i class="ace-icon fa fa-pencil bigger-130"></i>编辑</a>

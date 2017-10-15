@@ -28,26 +28,32 @@ namespace cnooc.property.manage.Controllers
 		/// <summary>
 		/// 会议服务 会议预定管理 保存
 		/// </summary>
-		public bool meetingorderSave(tb_meetingorder model)
+		public JsonResult meetingorderSave(tb_meetingorder model)
 		{
 			if (model == null)
 			{
-				return false;
+				return ResultTool.jsonResult(false, "参数错误！");
 			}
 			if(!String.IsNullOrEmpty(model.id))
 			{
-				 return dmeetingorder.Update(model);
+				bool boolResult = dmeetingorder.Update(model);
+				return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "更新失败！");
 			}
-			model.id = Guid.NewGuid().ToString("N");
-			return dmeetingorder.Add(model);
+			else
+			{
+				model.id = Guid.NewGuid().ToString("N");
+				bool boolResult = dmeetingorder.Add(model);
+				return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "添加失败！");
+			}
 		}
 
 		/// <summary>
 		/// 会议服务 会议预定管理 删除
 		/// </summary>
-		public bool meetingorderDelete(tb_meetingorder model)
+		public JsonResult meetingorderDelete(tb_meetingorder model)
 		{
-			return dmeetingorder.Delete(model);
+			bool boolResult = dmeetingorder.Delete(model);
+			return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "删除失败！");
 		}
 
 		/// <summary>

@@ -28,26 +28,32 @@ namespace cnooc.property.manage.Controllers
 		/// <summary>
 		/// 收费标准 保存
 		/// </summary>
-		public bool restaurantfeeSave(tb_restaurantfee model)
+		public JsonResult restaurantfeeSave(tb_restaurantfee model)
 		{
 			if (model == null)
 			{
-				return false;
+				return ResultTool.jsonResult(false, "参数错误！");
 			}
 			if(!String.IsNullOrEmpty(model.id))
 			{
-				 return drestaurantfee.Update(model);
+				bool boolResult = drestaurantfee.Update(model);
+				return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "更新失败！");
 			}
-			model.id = Guid.NewGuid().ToString("N");
-			return drestaurantfee.Add(model);
+			else
+			{
+				model.id = Guid.NewGuid().ToString("N");
+				bool boolResult = drestaurantfee.Add(model);
+				return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "添加失败！");
+			}
 		}
 
 		/// <summary>
 		/// 收费标准 删除
 		/// </summary>
-		public bool restaurantfeeDelete(tb_restaurantfee model)
+		public JsonResult restaurantfeeDelete(tb_restaurantfee model)
 		{
-			return drestaurantfee.Delete(model);
+			bool boolResult = drestaurantfee.Delete(model);
+			return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "删除失败！");
 		}
 
 		/// <summary>

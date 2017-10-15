@@ -28,26 +28,32 @@ namespace cnooc.property.manage.Controllers
 		/// <summary>
 		/// 我的收藏 保存
 		/// </summary>
-		public bool favoriteSave(tb_favorite model)
+		public JsonResult favoriteSave(tb_favorite model)
 		{
 			if (model == null)
 			{
-				return false;
+				return ResultTool.jsonResult(false, "参数错误！");
 			}
 			if(!String.IsNullOrEmpty(model.id))
 			{
-				 return dfavorite.Update(model);
+				bool boolResult = dfavorite.Update(model);
+				return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "更新失败！");
 			}
-			model.id = Guid.NewGuid().ToString("N");
-			return dfavorite.Add(model);
+			else
+			{
+				model.id = Guid.NewGuid().ToString("N");
+				bool boolResult = dfavorite.Add(model);
+				return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "添加失败！");
+			}
 		}
 
 		/// <summary>
 		/// 我的收藏 删除
 		/// </summary>
-		public bool favoriteDelete(tb_favorite model)
+		public JsonResult favoriteDelete(tb_favorite model)
 		{
-			return dfavorite.Delete(model);
+			bool boolResult = dfavorite.Delete(model);
+			return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "删除失败！");
 		}
 
 		/// <summary>

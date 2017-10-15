@@ -28,21 +28,32 @@ namespace cnooc.property.manage.Controllers
 		/// <summary>
 		/// 微信 保存
 		/// </summary>
-		public bool weixinlicenseSave(tb_weixinlicense model)
+		public JsonResult weixinlicenseSave(tb_weixinlicense model)
 		{
 			if (model == null)
 			{
-				return false;
+				return ResultTool.jsonResult(false, "参数错误！");
 			}
-			return dweixinlicense.Add(model);
+			if(!String.IsNullOrEmpty(model.id))
+			{
+				bool boolResult = dweixinlicense.Update(model);
+				return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "更新失败！");
+			}
+			else
+			{
+				model.id = Guid.NewGuid().ToString("N");
+				bool boolResult = dweixinlicense.Add(model);
+				return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "添加失败！");
+			}
 		}
 
 		/// <summary>
 		/// 微信 删除
 		/// </summary>
-		public bool weixinlicenseDelete(tb_weixinlicense model)
+		public JsonResult weixinlicenseDelete(tb_weixinlicense model)
 		{
-			return dweixinlicense.Delete(model);
+			bool boolResult = dweixinlicense.Delete(model);
+			return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "删除失败！");
 		}
 
 		/// <summary>

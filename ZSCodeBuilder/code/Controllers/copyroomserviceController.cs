@@ -28,26 +28,32 @@ namespace cnooc.property.manage.Controllers
 		/// <summary>
 		/// 服务类别 保存
 		/// </summary>
-		public bool copyroomserviceSave(tb_copyroomservice model)
+		public JsonResult copyroomserviceSave(tb_copyroomservice model)
 		{
 			if (model == null)
 			{
-				return false;
+				return ResultTool.jsonResult(false, "参数错误！");
 			}
 			if(!String.IsNullOrEmpty(model.id))
 			{
-				 return dcopyroomservice.Update(model);
+				bool boolResult = dcopyroomservice.Update(model);
+				return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "更新失败！");
 			}
-			model.id = Guid.NewGuid().ToString("N");
-			return dcopyroomservice.Add(model);
+			else
+			{
+				model.id = Guid.NewGuid().ToString("N");
+				bool boolResult = dcopyroomservice.Add(model);
+				return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "添加失败！");
+			}
 		}
 
 		/// <summary>
 		/// 服务类别 删除
 		/// </summary>
-		public bool copyroomserviceDelete(tb_copyroomservice model)
+		public JsonResult copyroomserviceDelete(tb_copyroomservice model)
 		{
-			return dcopyroomservice.Delete(model);
+			bool boolResult = dcopyroomservice.Delete(model);
+			return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "删除失败！");
 		}
 
 		/// <summary>

@@ -28,26 +28,32 @@ namespace cnooc.property.manage.Controllers
 		/// <summary>
 		/// 会议室配套设备设施 保存
 		/// </summary>
-		public bool meetingroomdeviceSave(tb_meetingroomdevice model)
+		public JsonResult meetingroomdeviceSave(tb_meetingroomdevice model)
 		{
 			if (model == null)
 			{
-				return false;
+				return ResultTool.jsonResult(false, "参数错误！");
 			}
 			if(!String.IsNullOrEmpty(model.id))
 			{
-				 return dmeetingroomdevice.Update(model);
+				bool boolResult = dmeetingroomdevice.Update(model);
+				return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "更新失败！");
 			}
-			model.id = Guid.NewGuid().ToString("N");
-			return dmeetingroomdevice.Add(model);
+			else
+			{
+				model.id = Guid.NewGuid().ToString("N");
+				bool boolResult = dmeetingroomdevice.Add(model);
+				return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "添加失败！");
+			}
 		}
 
 		/// <summary>
 		/// 会议室配套设备设施 删除
 		/// </summary>
-		public bool meetingroomdeviceDelete(tb_meetingroomdevice model)
+		public JsonResult meetingroomdeviceDelete(tb_meetingroomdevice model)
 		{
-			return dmeetingroomdevice.Delete(model);
+			bool boolResult = dmeetingroomdevice.Delete(model);
+			return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "删除失败！");
 		}
 
 		/// <summary>

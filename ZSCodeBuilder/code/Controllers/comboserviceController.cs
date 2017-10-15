@@ -28,26 +28,32 @@ namespace cnooc.property.manage.Controllers
 		/// <summary>
 		/// 套餐服务内容 保存
 		/// </summary>
-		public bool comboserviceSave(tb_comboservice model)
+		public JsonResult comboserviceSave(tb_comboservice model)
 		{
 			if (model == null)
 			{
-				return false;
+				return ResultTool.jsonResult(false, "参数错误！");
 			}
 			if(!String.IsNullOrEmpty(model.id))
 			{
-				 return dcomboservice.Update(model);
+				bool boolResult = dcomboservice.Update(model);
+				return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "更新失败！");
 			}
-			model.id = Guid.NewGuid().ToString("N");
-			return dcomboservice.Add(model);
+			else
+			{
+				model.id = Guid.NewGuid().ToString("N");
+				bool boolResult = dcomboservice.Add(model);
+				return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "添加失败！");
+			}
 		}
 
 		/// <summary>
 		/// 套餐服务内容 删除
 		/// </summary>
-		public bool comboserviceDelete(tb_comboservice model)
+		public JsonResult comboserviceDelete(tb_comboservice model)
 		{
-			return dcomboservice.Delete(model);
+			bool boolResult = dcomboservice.Delete(model);
+			return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "删除失败！");
 		}
 
 		/// <summary>

@@ -28,26 +28,32 @@ namespace cnooc.property.manage.Controllers
 		/// <summary>
 		/// 呼叫记录 保存
 		/// </summary>
-		public bool calllogSave(tb_calllog model)
+		public JsonResult calllogSave(tb_calllog model)
 		{
 			if (model == null)
 			{
-				return false;
+				return ResultTool.jsonResult(false, "参数错误！");
 			}
 			if(!String.IsNullOrEmpty(model.id))
 			{
-				 return dcalllog.Update(model);
+				bool boolResult = dcalllog.Update(model);
+				return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "更新失败！");
 			}
-			model.id = Guid.NewGuid().ToString("N");
-			return dcalllog.Add(model);
+			else
+			{
+				model.id = Guid.NewGuid().ToString("N");
+				bool boolResult = dcalllog.Add(model);
+				return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "添加失败！");
+			}
 		}
 
 		/// <summary>
 		/// 呼叫记录 删除
 		/// </summary>
-		public bool calllogDelete(tb_calllog model)
+		public JsonResult calllogDelete(tb_calllog model)
 		{
-			return dcalllog.Delete(model);
+			bool boolResult = dcalllog.Delete(model);
+			return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "删除失败！");
 		}
 
 		/// <summary>

@@ -28,26 +28,32 @@ namespace cnooc.property.manage.Controllers
 		/// <summary>
 		/// 餐饮美食 保存
 		/// </summary>
-		public bool restaurantSave(tb_restaurant model)
+		public JsonResult restaurantSave(tb_restaurant model)
 		{
 			if (model == null)
 			{
-				return false;
+				return ResultTool.jsonResult(false, "参数错误！");
 			}
 			if(!String.IsNullOrEmpty(model.id))
 			{
-				 return drestaurant.Update(model);
+				bool boolResult = drestaurant.Update(model);
+				return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "更新失败！");
 			}
-			model.id = Guid.NewGuid().ToString("N");
-			return drestaurant.Add(model);
+			else
+			{
+				model.id = Guid.NewGuid().ToString("N");
+				bool boolResult = drestaurant.Add(model);
+				return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "添加失败！");
+			}
 		}
 
 		/// <summary>
 		/// 餐饮美食 删除
 		/// </summary>
-		public bool restaurantDelete(tb_restaurant model)
+		public JsonResult restaurantDelete(tb_restaurant model)
 		{
-			return drestaurant.Delete(model);
+			bool boolResult = drestaurant.Delete(model);
+			return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "删除失败！");
 		}
 
 		/// <summary>

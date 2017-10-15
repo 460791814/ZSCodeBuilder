@@ -28,26 +28,32 @@ namespace cnooc.property.manage.Controllers
 		/// <summary>
 		/// 文印设计 保存
 		/// </summary>
-		public bool copyroomSave(tb_copyroom model)
+		public JsonResult copyroomSave(tb_copyroom model)
 		{
 			if (model == null)
 			{
-				return false;
+				return ResultTool.jsonResult(false, "参数错误！");
 			}
 			if(!String.IsNullOrEmpty(model.id))
 			{
-				 return dcopyroom.Update(model);
+				bool boolResult = dcopyroom.Update(model);
+				return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "更新失败！");
 			}
-			model.id = Guid.NewGuid().ToString("N");
-			return dcopyroom.Add(model);
+			else
+			{
+				model.id = Guid.NewGuid().ToString("N");
+				bool boolResult = dcopyroom.Add(model);
+				return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "添加失败！");
+			}
 		}
 
 		/// <summary>
 		/// 文印设计 删除
 		/// </summary>
-		public bool copyroomDelete(tb_copyroom model)
+		public JsonResult copyroomDelete(tb_copyroom model)
 		{
-			return dcopyroom.Delete(model);
+			bool boolResult = dcopyroom.Delete(model);
+			return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "删除失败！");
 		}
 
 		/// <summary>

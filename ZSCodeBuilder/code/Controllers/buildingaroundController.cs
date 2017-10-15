@@ -28,26 +28,32 @@ namespace cnooc.property.manage.Controllers
 		/// <summary>
 		/// 周边配套介绍 保存
 		/// </summary>
-		public bool buildingaroundSave(tb_buildingaround model)
+		public JsonResult buildingaroundSave(tb_buildingaround model)
 		{
 			if (model == null)
 			{
-				return false;
+				return ResultTool.jsonResult(false, "参数错误！");
 			}
 			if(!String.IsNullOrEmpty(model.id))
 			{
-				 return dbuildingaround.Update(model);
+				bool boolResult = dbuildingaround.Update(model);
+				return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "更新失败！");
 			}
-			model.id = Guid.NewGuid().ToString("N");
-			return dbuildingaround.Add(model);
+			else
+			{
+				model.id = Guid.NewGuid().ToString("N");
+				bool boolResult = dbuildingaround.Add(model);
+				return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "添加失败！");
+			}
 		}
 
 		/// <summary>
 		/// 周边配套介绍 删除
 		/// </summary>
-		public bool buildingaroundDelete(tb_buildingaround model)
+		public JsonResult buildingaroundDelete(tb_buildingaround model)
 		{
-			return dbuildingaround.Delete(model);
+			bool boolResult = dbuildingaround.Delete(model);
+			return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "删除失败！");
 		}
 
 		/// <summary>

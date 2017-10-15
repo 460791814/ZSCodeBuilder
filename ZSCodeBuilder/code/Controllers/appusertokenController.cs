@@ -28,26 +28,32 @@ namespace cnooc.property.manage.Controllers
 		/// <summary>
 		/// App用户登陆Token 保存
 		/// </summary>
-		public bool appusertokenSave(tb_appusertoken model)
+		public JsonResult appusertokenSave(tb_appusertoken model)
 		{
 			if (model == null)
 			{
-				return false;
+				return ResultTool.jsonResult(false, "参数错误！");
 			}
 			if(!String.IsNullOrEmpty(model.id))
 			{
-				 return dappusertoken.Update(model);
+				bool boolResult = dappusertoken.Update(model);
+				return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "更新失败！");
 			}
-			model.id = Guid.NewGuid().ToString("N");
-			return dappusertoken.Add(model);
+			else
+			{
+				model.id = Guid.NewGuid().ToString("N");
+				bool boolResult = dappusertoken.Add(model);
+				return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "添加失败！");
+			}
 		}
 
 		/// <summary>
 		/// App用户登陆Token 删除
 		/// </summary>
-		public bool appusertokenDelete(tb_appusertoken model)
+		public JsonResult appusertokenDelete(tb_appusertoken model)
 		{
-			return dappusertoken.Delete(model);
+			bool boolResult = dappusertoken.Delete(model);
+			return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "删除失败！");
 		}
 
 		/// <summary>

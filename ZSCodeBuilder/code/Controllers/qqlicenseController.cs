@@ -28,21 +28,32 @@ namespace cnooc.property.manage.Controllers
 		/// <summary>
 		/// qq 保存
 		/// </summary>
-		public bool qqlicenseSave(tb_qqlicense model)
+		public JsonResult qqlicenseSave(tb_qqlicense model)
 		{
 			if (model == null)
 			{
-				return false;
+				return ResultTool.jsonResult(false, "参数错误！");
 			}
-			return dqqlicense.Add(model);
+			if(!String.IsNullOrEmpty(model.id))
+			{
+				bool boolResult = dqqlicense.Update(model);
+				return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "更新失败！");
+			}
+			else
+			{
+				model.id = Guid.NewGuid().ToString("N");
+				bool boolResult = dqqlicense.Add(model);
+				return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "添加失败！");
+			}
 		}
 
 		/// <summary>
 		/// qq 删除
 		/// </summary>
-		public bool qqlicenseDelete(tb_qqlicense model)
+		public JsonResult qqlicenseDelete(tb_qqlicense model)
 		{
-			return dqqlicense.Delete(model);
+			bool boolResult = dqqlicense.Delete(model);
+			return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "删除失败！");
 		}
 
 		/// <summary>

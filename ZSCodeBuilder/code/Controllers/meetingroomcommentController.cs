@@ -28,26 +28,32 @@ namespace cnooc.property.manage.Controllers
 		/// <summary>
 		/// 会议室评价 保存
 		/// </summary>
-		public bool meetingroomcommentSave(tb_meetingroomcomment model)
+		public JsonResult meetingroomcommentSave(tb_meetingroomcomment model)
 		{
 			if (model == null)
 			{
-				return false;
+				return ResultTool.jsonResult(false, "参数错误！");
 			}
 			if(!String.IsNullOrEmpty(model.id))
 			{
-				 return dmeetingroomcomment.Update(model);
+				bool boolResult = dmeetingroomcomment.Update(model);
+				return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "更新失败！");
 			}
-			model.id = Guid.NewGuid().ToString("N");
-			return dmeetingroomcomment.Add(model);
+			else
+			{
+				model.id = Guid.NewGuid().ToString("N");
+				bool boolResult = dmeetingroomcomment.Add(model);
+				return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "添加失败！");
+			}
 		}
 
 		/// <summary>
 		/// 会议室评价 删除
 		/// </summary>
-		public bool meetingroomcommentDelete(tb_meetingroomcomment model)
+		public JsonResult meetingroomcommentDelete(tb_meetingroomcomment model)
 		{
-			return dmeetingroomcomment.Delete(model);
+			bool boolResult = dmeetingroomcomment.Delete(model);
+			return ResultTool.jsonResult(boolResult, boolResult ? "成功！" : "删除失败！");
 		}
 
 		/// <summary>
