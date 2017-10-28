@@ -24,3 +24,16 @@ D:\WB\ZSCodeBuilder\IBuilder\bin\Debug\CmConfig.pdb
 D:\WB\ZSCodeBuilder\IBuilder\obj\Debug\IBuilder.csprojResolveAssemblyReference.cache
 D:\WB\ZSCodeBuilder\IBuilder\obj\Debug\IBuilder.dll
 D:\WB\ZSCodeBuilder\IBuilder\obj\Debug\IBuilder.pdb
+C:\Users\Administrator\Documents\GitHub\ZSCodeBuilder\IBuilder\bin\Debug\IBuilder.dll
+C:\Users\Administrator\Documents\GitHub\ZSCodeBuilder\IBuilder\bin\Debug\IBuilder.pdb
+C:\Users\Administrator\Documents\GitHub\ZSCodeBuilder\IBuilder\bin\Debug\CodeHelper.dll
+C:\Users\Administrator\Documents\GitHub\ZSCodeBuilder\IBuilder\bin\Debug\IDBO.dll
+C:\Users\Administrator\Documents\GitHub\ZSCodeBuilder\IBuilder\bin\Debug\Utility.dll
+C:\Users\Administrator\Documents\GitHub\ZSCodeBuilder\IBuilder\bin\Debug\CmConfig.dll
+C:\Users\Administrator\Documents\GitHub\ZSCodeBuilder\IBuilder\bin\Debug\CodeHelper.pdb
+C:\Users\Administrator\Documents\GitHub\ZSCodeBuilder\IBuilder\bin\Debug\IDBO.pdb
+C:\Users\Administrator\Documents\GitHub\ZSCodeBuilder\IBuilder\bin\Debug\Utility.pdb
+C:\Users\Administrator\Documents\GitHub\ZSCodeBuilder\IBuilder\bin\Debug\CmConfig.pdb
+C:\Users\Administrator\Documents\GitHub\ZSCodeBuilder\IBuilder\obj\Debug\IBuilder.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Documents\GitHub\ZSCodeBuilder\IBuilder\obj\Debug\IBuilder.dll
+C:\Users\Administrator\Documents\GitHub\ZSCodeBuilder\IBuilder\obj\Debug\IBuilder.pdb

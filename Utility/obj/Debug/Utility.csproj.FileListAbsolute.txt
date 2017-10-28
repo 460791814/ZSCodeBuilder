@@ -6,3 +6,7 @@ D:\WB\ZSCodeBuilder\Utility\bin\Debug\Utility.dll
 D:\WB\ZSCodeBuilder\Utility\bin\Debug\Utility.pdb
 D:\WB\ZSCodeBuilder\Utility\obj\Debug\Utility.dll
 D:\WB\ZSCodeBuilder\Utility\obj\Debug\Utility.pdb
+C:\Users\Administrator\Documents\GitHub\ZSCodeBuilder\Utility\bin\Debug\Utility.dll
+C:\Users\Administrator\Documents\GitHub\ZSCodeBuilder\Utility\bin\Debug\Utility.pdb
+C:\Users\Administrator\Documents\GitHub\ZSCodeBuilder\Utility\obj\Debug\Utility.dll
+C:\Users\Administrator\Documents\GitHub\ZSCodeBuilder\Utility\obj\Debug\Utility.pdb
