@@ -150,100 +150,103 @@ namespace BuilderModel
                     }
                 }
                 
-                strclass1.AppendSpace(2, "private " + columnType + isnull + " _" + columnName.ToLower());//私有变量
-                if (field.DefaultVal.Length > 0)
-                {
-                    switch (columnType.ToLower())
-                    {                        
-                        case "int":
-                        case "long":
-                            strclass1.Append("=" + field.DefaultVal.Trim().Replace("'", ""));  
-                            break;
-                        case "bool":
-                        case "bit":
-                            {
-                                string val=field.DefaultVal.Trim().Replace("'", "").ToLower();
-                                if(val=="1"||val=="true")
-                                {
-                                    strclass1.Append("= true" );
-                                }
-                                else
-                                {
-                                    strclass1.Append("= false");
-                                }
+               // strclass1.AppendSpace(2, "private " + columnType + isnull + " _" + columnName.ToLower());//私有变量
+                //if (field.DefaultVal.Length > 0)
+                //{
+                //    switch (columnType.ToLower())
+                //    {                        
+                //        case "int":
+                //        case "long":
+                //            strclass1.Append("=" + field.DefaultVal.Trim().Replace("'", ""));  
+                //            break;
+                //        case "bool":
+                //        case "bit":
+                //            {
+                //                string val=field.DefaultVal.Trim().Replace("'", "").ToLower();
+                //                if(val=="1"||val=="true")
+                //                {
+                //                    strclass1.Append("= true" );
+                //                }
+                //                else
+                //                {
+                //                    strclass1.Append("= false");
+                //                }
                                 
-                            }
-                            break;
-                        case "nchar":
-                        case "ntext":
-                        case "nvarchar":                          
-                        case "char":
-                        case "text":
-                        case "varchar":
-                        case "string":
-                            if (field.DefaultVal.Trim().StartsWith("N'"))
-                            {
-                                strclass1.Append("=" + field.DefaultVal.Trim().Remove(0, 1).Replace("'", "\""));  
-                            }
-                            else
-                            {
-                                if (field.DefaultVal.Trim().IndexOf("'") > -1)
-                                {
-                                    strclass1.Append("=" + field.DefaultVal.Trim().Replace("'", "\""));
-                                }
-                                else
-                                {
-                                    strclass1.Append("= \"" + field.DefaultVal.Trim().Replace("(", "").Replace(")", "") + "\"");
-                                }
-                            }                            
-                            break;
-                        case "datetime":
-                            if (field.DefaultVal == "getdate"||
-                                field.DefaultVal == "Now()"||
-                                field.DefaultVal == "Now"||
-                                field.DefaultVal == "CURRENT_TIME" ||
-                                field.DefaultVal == "CURRENT_DATE"
-                                )
-                            {
-                                strclass1.Append("= DateTime.Now");                                
-                            }
-                            else
-                            {
-                                strclass1.Append("= Convert.ToDateTime(" + field.DefaultVal.Trim().Replace("'", "\"") + ")");
-                            }
-                            break;
-                        case "uniqueidentifier":
-                            {
-                                //if (field.DefaultVal == "newid")
-                                //{
-                                //    strclass1.Append("=" + field.DefaultVal.Trim().Replace("'", ""));
-                                //}                                
-                            }
-                            break;
-                        case "decimal":
-                        case "double":
-                        case "float":
-                            {
-                                strclass1.Append("=" + field.DefaultVal.Replace("'", "").Replace("(", "").Replace(")", "").ToLower() + "M");                                
-                            }
-                            break;
-                        //case "sys_guid()":
-                        //    break;
-                        default:                            
-                        //    strclass1.Append("=" + field.DefaultVal);
-                            break;
+                //            }
+                //            break;
+                //        case "nchar":
+                //        case "ntext":
+                //        case "nvarchar":                          
+                //        case "char":
+                //        case "text":
+                //        case "varchar":
+                //        case "string":
+                //            if (field.DefaultVal.Trim().StartsWith("N'"))
+                //            {
+                //                strclass1.Append("=" + field.DefaultVal.Trim().Remove(0, 1).Replace("'", "\""));  
+                //            }
+                //            else
+                //            {
+                //                if (field.DefaultVal.Trim().IndexOf("'") > -1)
+                //                {
+                //                    strclass1.Append("=" + field.DefaultVal.Trim().Replace("'", "\""));
+                //                }
+                //                else
+                //                {
+                //                    strclass1.Append("= \"" + field.DefaultVal.Trim().Replace("(", "").Replace(")", "") + "\"");
+                //                }
+                //            }                            
+                //            break;
+                //        case "datetime":
+                //            if (field.DefaultVal == "getdate"||
+                //                field.DefaultVal == "Now()"||
+                //                field.DefaultVal == "Now"||
+                //                field.DefaultVal == "CURRENT_TIME" ||
+                //                field.DefaultVal == "CURRENT_DATE"
+                //                )
+                //            {
+                //                strclass1.Append("= DateTime.Now");                                
+                //            }
+                //            else
+                //            {
+                //                strclass1.Append("= Convert.ToDateTime(" + field.DefaultVal.Trim().Replace("'", "\"") + ")");
+                //            }
+                //            break;
+                //        case "uniqueidentifier":
+                //            {
+                //                //if (field.DefaultVal == "newid")
+                //                //{
+                //                //    strclass1.Append("=" + field.DefaultVal.Trim().Replace("'", ""));
+                //                //}                                
+                //            }
+                //            break;
+                //        case "decimal":
+                //        case "double":
+                //        case "float":
+                //            {
+                //                strclass1.Append("=" + field.DefaultVal.Replace("'", "").Replace("(", "").Replace(")", "").ToLower() + "M");                                
+                //            }
+                //            break;
+                //        //case "sys_guid()":
+                //        //    break;
+                //        default:                            
+                //        //    strclass1.Append("=" + field.DefaultVal);
+                //            break;
 
-                    }                    
-                }                
-                strclass1.AppendLine(";");
+                //    }                    
+                //}                
+               // strclass1.AppendLine(";");
 
                 strclass2.AppendSpaceLine(2, "/// <summary>");
                 strclass2.AppendSpaceLine(2, "/// " + deText);
                 strclass2.AppendSpaceLine(2, "/// </summary>");
                 strclass2.AppendSpaceLine(2, "public " + columnType + isnull + " " + columnName);//属性
                 strclass2.AppendSpaceLine(2, "{");
-                strclass2.AppendSpaceLine(3, "set{" + " _" + columnName.ToLower() + "=value;}");
-                strclass2.AppendSpaceLine(3, "get{return " + "_" + columnName.ToLower() + ";}");
+                strclass2.AppendSpaceLine(3, "set;");
+                strclass2.AppendSpaceLine(3, "get;");
+
+                //strclass2.AppendSpaceLine(3, "set{" + " _" + columnName.ToLower() + "=value;}");
+                //strclass2.AppendSpaceLine(3, "get{return " + "_" + columnName.ToLower() + ";}");
                 strclass2.AppendSpaceLine(2, "}");
             }
             strclass.Append(strclass1.Value);

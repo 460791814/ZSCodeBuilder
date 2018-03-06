@@ -121,8 +121,8 @@ namespace BuilderController
             stringPlus.AppendSpaceLine(2, "public ActionResult "+ _actionName + "List(" + ModelName + " model)");
             stringPlus.AppendSpaceLine(2, "{");
             stringPlus.AppendSpaceLine(3, "int count = 0;");
-            stringPlus.AppendSpaceLine(3, "ViewBag."+ _actionName + "List = d" + _actionName + ".GetList(model, ref count);");
-            stringPlus.AppendSpaceLine(3, "ViewBag.page = Utils.ShowPage(count, model.PageSize, model.PageIndex, 5);");
+            stringPlus.AppendSpaceLine(3, "ViewBag."+ _actionName + "List = d" + _actionName + ".GetListAndCount(model, ref count);");
+            stringPlus.AppendSpaceLine(3, "ViewBag.page = Utils.ShowPage(count, model.pagesize, model.pageindex, 5);");
             stringPlus.AppendSpaceLine(3, "return View();");
             stringPlus.AppendSpaceLine(2, "}");
             return stringPlus.ToString();
@@ -216,7 +216,7 @@ namespace BuilderController
             }
             stringPlus.AppendSpaceLine(2, "/// </summary>");
 
-            stringPlus.AppendSpaceLine(2, "public ActionResult " + _actionName + "Info(" + ModelName + " model)");
+            stringPlus.AppendSpaceLine(2, "public ActionResult " + _actionName + "Edit(" + ModelName + " model)");
             stringPlus.AppendSpaceLine(2, "{");
             stringPlus.AppendSpaceLine(3, "model = d" + _actionName + ".GetInfo(model);");
             stringPlus.AppendSpaceLine(3, "return View(model??new "+ ModelName + "());");

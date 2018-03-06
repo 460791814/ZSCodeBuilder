@@ -64,7 +64,7 @@ namespace BuilderView
         }
         public String CreateEditUrl()
         {
-            return "/" + ActionName + "/" + ActionName + "Info";
+            return "/" + ActionName + "/" + ActionName + "Edit";
         }
         public String CreateListUrl()
         {
@@ -108,9 +108,9 @@ namespace BuilderView
                 stringPlus.AppendSpaceLine(7, "<td>@" + ActionName + "List[i]." + item.ColumnName + "</td>");
             }
             stringPlus.AppendSpaceLine(7, "<td>");
-            stringPlus.AppendSpaceLine(8, "<div class=\"hidden-sm hidden-xs action-buttons\">");
-            stringPlus.AppendSpaceLine(9, "<a class=\"green\" href=\"javascript: void(0)\" onclick=\"zstools.edit('" + CreateEditUrl() + "?" + PrimaryKey + "=@" + ActionName + "List[i]." + PrimaryKey + "')\" ><i class=\"ace-icon fa fa-pencil bigger-130\"></i>编辑</a>");
-            stringPlus.AppendSpaceLine(9, "<a class=\"red\" href=\"javascript: void(0)\" onclick=\"zstools.del('" + CreateDelUrl() + "?" + PrimaryKey + "=@" + ActionName + "List[i]." + PrimaryKey + "',this)\" ><i class=\"ace-icon fa fa-trash-o bigger-130\"></i>删除</a>");
+            stringPlus.AppendSpaceLine(8, "<div class=\" action-buttons\">");
+            stringPlus.AppendSpaceLine(9, "<a class=\"green\" href=\"javascript: void(0)\" onclick=\"zstools.edit('" + CreateEditUrl() + "?" + PrimaryKey + "=@" + ActionName + "List[i]." + PrimaryKey + "')\" > 编辑</a>");
+            stringPlus.AppendSpaceLine(9, "<a class=\"red\" href=\"javascript: void(0)\" onclick=\"zstools.del('" + CreateDelUrl() + "?" + PrimaryKey + "=@" + ActionName + "List[i]." + PrimaryKey + "',this)\" > 删除</a>");
             stringPlus.AppendSpaceLine(8, "</div>");
             stringPlus.AppendSpaceLine(7, "</td>");
 
@@ -144,8 +144,8 @@ namespace BuilderView
         {
             StringPlus stringPlus = new StringPlus();
             StringPlus stringPlus1 = new StringPlus();
-            stringPlus.AppendSpaceLine(1, "<form action=\""+CreateSaveUrl()+"\" class=\"form-horizontal\" role=\"form\">");
-            stringPlus.AppendSpaceLine(2, "<input type=\"hidden\" name=\"" + PrimaryKey + "\" value=\"@Model." + PrimaryKey + "\" />");
+            stringPlus.AppendSpaceLine(1, "<form action=\""+CreateSaveUrl()+"\"   role=\"form\">");
+            stringPlus.AppendSpaceLine(2, "<input type=\"hidden\" id=\"" + PrimaryKey + "\" name=\"" + PrimaryKey + "\" value=\"@Model." + PrimaryKey + "\" />");
             List<ColumnInfo> tempList = new List<ColumnInfo>();
             tempList.AddRange(_fieldlist);
             tempList.Remove(CodeCommon.GetPrimaryKey(tempList));
@@ -154,26 +154,19 @@ namespace BuilderView
             for (int i = 1; i < tempList.Count + 1; i++)
             {
                 string columnName = tempList[i - 1].ColumnName;
-                string description = tempList[i - 1].Description;
-                if (i % 2 == 0)
-                {
-                    stringPlus.AppendSpaceLine(3, "<label class=\"col-xs-2 control-label \" >" + description + "</label>");
-                    stringPlus.AppendSpaceLine(3, "<div class=\"col-xs-4\"><input type=\"text\" id=\"" + columnName + "\" name=\"" + columnName + "\" class=\"col-xs-10 col-sm-10 \" value=\"@Model." + columnName + "\"></div>");
-                    stringPlus.AppendSpaceLine(2, "</div>");
-                }
-                else
-                {
+                string description = tempList[i - 1].Description+":";
+      
+    
+          
                     stringPlus.AppendSpaceLine(2, "<div class=\"form-group\">");
 
-                    stringPlus.AppendSpaceLine(3, "<label class=\"col-xs-2 control-label \" >" + description + "</label>");
-                    stringPlus.AppendSpaceLine(3, "<div class=\"col-xs-4\"><input type=\"text\" id=\"" + columnName + "\" name=\"" + columnName + "\" class=\"col-xs-10 col-sm-10 \" value=\"@Model." + columnName + "\"></div>");
-                }
-            }
-            if (tempList.Count % 2 != 0)
-            {
+                    stringPlus.AppendSpaceLine(3, "<label>" + description + "</label>");
+                    stringPlus.AppendSpaceLine(3, "<input type=\"text\" id=\"" + columnName + "\" name=\"" + columnName + "\" class=\"form-control \" value=\"@Model." + columnName + "\">");
                 stringPlus.AppendSpaceLine(2, "</div>");
             }
-            stringPlus.AppendSpaceLine(2, "<div class=\"clearfix form-actions\"><div class=\"col-md-offset-5 col-md-9\"><button class=\"btn btn-info\" type=\"button\" onclick=\"zstools.save()\"><i class=\"ace-icon fa fa-check bigger-110\"></i>Save（保存）</button></div></div>");
+         
+ 
+            stringPlus.AppendSpaceLine(2, "<div style=\"width:100%; text-align:right; \"><button type=\"button\" class=\"btn btn-primary\" onclick=\"zstools.save()\">保存</button></div>");
             stringPlus.AppendSpaceLine(1, "</form>");
             return stringPlus.Value;
         }

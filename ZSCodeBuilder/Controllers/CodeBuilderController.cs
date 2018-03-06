@@ -26,13 +26,13 @@ namespace ZSCodeBuilder.Controllers
         DbObject db = new DbObject(connStr);
         IBuilderModel builderModel = null;
         IBuilderDAL builderDAL = null;
-        string dbName = "ryxz";
+        string dbName = "qjstds";
         // GET: ZS
         public ActionResult Index()
         {
-            // CreateDal();
-            // CreateModel();
-             // CreateController();
+            CreateDal();
+            CreateModel();
+              CreateController();
             CreateListAndInfo();
             return View();
         }
@@ -122,7 +122,7 @@ namespace ZSCodeBuilder.Controllers
         public string CreateListAndInfo()
         {
             string listfilePath =ConfigurationManager.AppSettings["TemplateDir"] + "list.cshtml";
-            string listfilePath2 = ConfigurationManager.AppSettings["TemplateDir"] + "list2.cshtml";
+          //  string listfilePath2 = ConfigurationManager.AppSettings["TemplateDir"] + "list2.cshtml";
             string infofilePath =ConfigurationManager.AppSettings["TemplateDir"] + "info.cshtml";
             BuilderMvcView builderMvcView = new BuilderMvcView();
             var tables = db.GetTableViews(dbName);
@@ -153,12 +153,12 @@ namespace ZSCodeBuilder.Controllers
                 listhtml = listhtml.Replace("<#list:infourl#>", builderMvcView.CreateEditUrl());
                 listhtml = listhtml.Replace("<#list:table#>", builderMvcView.CreateTable());
                 Utils.CreateFile("/code/Views/" + actionName, actionName + "List.cshtml", listhtml);
-                //生成列表2
-                string listhtml2 = Utils.ReadFile(listfilePath2);
-                listhtml2 = listhtml2.Replace("<#list:title#>", builderMvcView.TableDescription);
-                listhtml2 = listhtml2.Replace("<#list:infourl#>", builderMvcView.CreateEditUrl());
-                listhtml2 = listhtml2.Replace("<#list:table#>", builderMvcView.CreateTable());
-                Utils.CreateFile("/code/Views2/" + actionName, actionName + "List.cshtml", listhtml);
+                ////生成列表2
+                //string listhtml2 = Utils.ReadFile(listfilePath2);
+                //listhtml2 = listhtml2.Replace("<#list:title#>", builderMvcView.TableDescription);
+                //listhtml2 = listhtml2.Replace("<#list:infourl#>", builderMvcView.CreateEditUrl());
+                //listhtml2 = listhtml2.Replace("<#list:table#>", builderMvcView.CreateTable());
+                //Utils.CreateFile("/code/Views2/" + actionName, actionName + "List.cshtml", listhtml);
                 //生成详情
                 string infohtml = Utils.ReadFile(infofilePath);
                 infohtml = infohtml.Replace("<#info:modelname#>", "Model."+item);
@@ -168,8 +168,8 @@ namespace ZSCodeBuilder.Controllers
                 infohtml = infohtml.Replace("<#info:saveurl#>", builderMvcView.CreateSaveUrl());
                 infohtml = infohtml.Replace("<#info:form#>", builderMvcView.CreateInfoView());
 
-
-                Utils.CreateFile("/code/Views/" + actionName, actionName + "Info.cshtml", infohtml);
+ 
+                Utils.CreateFile("/code/Views/" + actionName, actionName + "Edit.cshtml", infohtml);
 
             }
             return "生成成功";

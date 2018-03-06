@@ -521,11 +521,9 @@ namespace BuilderDALSQL
                 strclass.AppendLine(CreatDelete());
             }
 
-            if (List)
-            {
-                strclass.AppendLine(CreatGetList());
-
-            }
+ 
+            strclass.AppendLine(CreatGetListAndCount());
+            strclass.AppendLine(CreatGetList());
             strclass.AppendLine(CreatGetInfo());
             #endregion
 
@@ -819,14 +817,14 @@ namespace BuilderDALSQL
 
             foreach (ColumnInfo field in Fieldlist)
             {
- 
+
                 string columnName = field.ColumnName;
                 string columnType = field.TypeName;
                 string Length = field.Length;
                 bool IsIdentity = field.IsIdentity;
                 bool isPK = field.IsPrimaryKey;
                 bool nullable = field.Nullable;
-      
+
                 if (field.IsIdentity || field.IsPrimaryKey || (Keys.Contains(field)))
                 {
                     continue;
@@ -848,7 +846,7 @@ namespace BuilderDALSQL
                             {
                                 stringPlus.AppendSpaceLine(3, "if(model." + columnName + "!=null)");
                                 stringPlus.AppendSpaceLine(3, "{");
-                                stringPlus.AppendSpaceLine(4, "setSql.Append( \"" + columnName + "=@" + columnName +  ",\");");
+                                stringPlus.AppendSpaceLine(4, "setSql.Append( \"" + columnName + "=@" + columnName + ",\");");
                                 stringPlus.AppendSpaceLine(3, "}");
                             }
                             else
@@ -864,7 +862,7 @@ namespace BuilderDALSQL
                         {
                             stringPlus.AppendSpaceLine(3, "if(!String.IsNullOrEmpty(model." + columnName + "))");
                             stringPlus.AppendSpaceLine(3, "{");
-                            stringPlus.AppendSpaceLine(4, "setSql.Append( \"" + columnName + "=@" + columnName +  ",\");");
+                            stringPlus.AppendSpaceLine(4, "setSql.Append( \"" + columnName + "=@" + columnName + ",\");");
                             stringPlus.AppendSpaceLine(3, "}");
                         }
                         break;
@@ -872,7 +870,7 @@ namespace BuilderDALSQL
                         {
                             stringPlus.AppendSpaceLine(3, "if(model." + columnName + ")");
                             stringPlus.AppendSpaceLine(3, "{");
-                            stringPlus.AppendSpaceLine(4, "setSql.Append( \"" + columnName + "=@" + columnName +  ",\");");
+                            stringPlus.AppendSpaceLine(4, "setSql.Append( \"" + columnName + "=@" + columnName + ",\");");
                             stringPlus.AppendSpaceLine(3, "}");
                         }
                         break;
@@ -896,14 +894,15 @@ namespace BuilderDALSQL
                     default:
                         stringPlus.AppendSpaceLine(3, "if(model." + columnName + "!=null)");
                         stringPlus.AppendSpaceLine(3, "{");
-                        stringPlus.AppendSpaceLine(4, "setSql.Append( \"" + columnName + "=@" + columnName +  ",\");");
+                        stringPlus.AppendSpaceLine(4, "setSql.Append( \"" + columnName + "=@" + columnName + ",\");");
                         stringPlus.AppendSpaceLine(3, "}");
                         break;
                 }
                 #endregion
-                
-            }
 
+            }
+            //String identityName = Fieldlist.Find(field => field.IsIdentity || field.IsPrimaryKey || (Keys.Contains(field)))?.ColumnName;
+            //stringPlus.AppendSpaceLine(3, "setSql.Append(DapperHelper.CreateUpdateSql(model,new string[] { \"" + identityName + "\" }));");
             stringPlus.AppendSpaceLine(3, "strSql.Append(setSql.ToString().TrimEnd(','));");
 
             stringPlus.AppendSpaceLine(3, "strSql.Append(\" where " + CodeCommon.GetWhereParameterExpression(this.Keys, false, this.dbobj.DbType) + "\");");
@@ -1025,13 +1024,13 @@ namespace BuilderDALSQL
         /// <param name="_tablename"></param>
         /// <param name="_key"></param>
         /// <returns></returns>
-        public string CreatGetList()
+        public string CreatGetListAndCount()
         {
             StringPlus stringPlus = new StringPlus();
             stringPlus.AppendSpaceLine(2, "/// <summary>");
             stringPlus.AppendSpaceLine(2, "/// " + Languagelist["summaryGetList"].ToString());
             stringPlus.AppendSpaceLine(2, "/// </summary>");
-            stringPlus.AppendSpaceLine(2, "public List<"+ ModelSpace+ "> GetList(" + ModelSpace + " model, ref int total)");
+            stringPlus.AppendSpaceLine(2, "public List<"+ ModelSpace+ "> GetListAndCount(" + ModelSpace + " model, ref int total)");
             stringPlus.AppendSpaceLine(2, "{");
             stringPlus.AppendSpaceLine(3, "List<"+ ModelSpace+ "> list;");
             stringPlus.AppendSpaceLine(3, "StringBuilder strSql=new StringBuilder();");
@@ -1119,7 +1118,7 @@ namespace BuilderDALSQL
             stringPlus.AppendSpaceLine(3,"strSql.Append(whereSql);");
             stringPlus.AppendSpaceLine(3, "string CountSql = \"SELECT COUNT(1) as RowsCount FROM (\" + strSql.ToString() + \") AS CountList\";");
             stringPlus.AppendSpaceLine(3, "string pageSqlStr = \"select * from ( \" + strSql.ToString() + \" ) as Temp_PageData where Temp_PageData.RID BETWEEN {0} AND {1}\";");
-            stringPlus.AppendSpaceLine(3, "pageSqlStr = string.Format(pageSqlStr, (model.PageSize * (model.PageIndex - 1) + 1).ToString(), (model.PageSize * model.PageIndex).ToString());");
+            stringPlus.AppendSpaceLine(3, "pageSqlStr = string.Format(pageSqlStr, (model.pagesize * (model.pageindex - 1) + 1).ToString(), (model.pagesize * model.pageindex).ToString());");
             stringPlus.AppendSpaceLine(3, "using (IDbConnection conn = DapperHelper.OpenConnection())");
             stringPlus.AppendSpaceLine(3, "{");
             stringPlus.AppendSpaceLine(4, "list = conn.Query <"+ ModelSpace + ">(pageSqlStr, model)?.ToList();");
@@ -1130,7 +1129,118 @@ namespace BuilderDALSQL
 
             return stringPlus.Value;
         }
+        /// <summary>
+        /// 得到GetList()的代码
+        /// </summary>
+        /// <param name="_tablename"></param>
+        /// <param name="_key"></param>
+        /// <returns></returns>
+        public string CreatGetList()
+        {
+            StringPlus stringPlus = new StringPlus();
+            stringPlus.AppendSpaceLine(2, "/// <summary>");
+            stringPlus.AppendSpaceLine(2, "/// " + Languagelist["summaryGetList"].ToString());
+            stringPlus.AppendSpaceLine(2, "/// </summary>");
+            stringPlus.AppendSpaceLine(2, "public List<" + ModelSpace + "> GetAll(" + ModelSpace + " model)");
+            stringPlus.AppendSpaceLine(2, "{");
+            stringPlus.AppendSpaceLine(3, "List<" + ModelSpace + "> list;");
+            stringPlus.AppendSpaceLine(3, "StringBuilder strSql=new StringBuilder();");
+            stringPlus.AppendSpaceLine(3, "StringBuilder whereSql = new StringBuilder(\" where 1 = 1 \");");
+            stringPlus.AppendSpaceLine(3, "strSql.Append(\" select * from " + _tablename + " \");");
 
+            foreach (ColumnInfo field in Fieldlist)
+            {
+                string columnName = field.ColumnName;
+                string columnType = field.TypeName;
+                bool nullable = field.Nullable;
+                //if (field.IsPrimaryKey)
+                //{
+                //    continue;
+                //}
+                #region 字段赋值
+                switch (CodeCommon.DbTypeToCS(columnType))
+                {
+                    case "int":
+                    case "long":
+                    case "decimal":
+                    case "float":
+                    case "DateTime":
+                        {
+                            if (nullable)
+                            {
+                                stringPlus.AppendSpaceLine(3, "if(model." + columnName + "!=null)");
+                                stringPlus.AppendSpaceLine(3, "{");
+                                stringPlus.AppendSpaceLine(4, "whereSql.Append( \" and " + columnName + "=@" + columnName + "\");");
+                                stringPlus.AppendSpaceLine(3, "}");
+                            }
+                            else
+                            {
+                                stringPlus.AppendSpaceLine(3, "if(model." + columnName + ">0)");
+                                stringPlus.AppendSpaceLine(3, "{");
+                                stringPlus.AppendSpaceLine(4, "whereSql.Append( \" and " + columnName + "=@" + columnName + "\");");
+                                stringPlus.AppendSpaceLine(3, "}");
+                            }
+                        }
+                        break;
+                    case "string":
+                        {
+                            stringPlus.AppendSpaceLine(3, "if(!String.IsNullOrEmpty(model." + columnName + "))");
+                            stringPlus.AppendSpaceLine(3, "{");
+                            stringPlus.AppendSpaceLine(4, "whereSql.Append( \" and " + columnName + "=@" + columnName + "\");");
+                            stringPlus.AppendSpaceLine(3, "}");
+                        }
+                        break;
+                    case "bool":
+                        {
+                            stringPlus.AppendSpaceLine(3, "if(model." + columnName + ")");
+                            stringPlus.AppendSpaceLine(3, "{");
+                            stringPlus.AppendSpaceLine(4, "whereSql.Append( \" and " + columnName + "=@" + columnName + "\");");
+                            stringPlus.AppendSpaceLine(3, "}");
+                        }
+                        break;
+                    case "byte[]":
+                        {
+                            stringPlus.AppendSpaceLine(3, "if(model." + columnName + "!=null)");
+                            stringPlus.AppendSpaceLine(3, "{");
+                            stringPlus.AppendSpaceLine(4, "whereSql.Append( \" and " + columnName + "=@" + columnName + "\");");
+                            stringPlus.AppendSpaceLine(3, "}");
+                        }
+                        break;
+                    case "uniqueidentifier":
+                    case "Guid":
+                        {
+                            stringPlus.AppendSpaceLine(3, "if(!String.IsNullOrEmpty(model." + columnName + "))");
+                            stringPlus.AppendSpaceLine(3, "{");
+                            stringPlus.AppendSpaceLine(4, "whereSql.Append( \" and " + columnName + "=@" + columnName + "\");");
+                            stringPlus.AppendSpaceLine(3, "}");
+                        }
+                        break;
+                    default:
+                        stringPlus.AppendSpaceLine(3, "if(model." + columnName + "!=null)");
+                        stringPlus.AppendSpaceLine(3, "{");
+                        stringPlus.AppendSpaceLine(4, "whereSql.Append( \" and " + columnName + "=@" + columnName + "\");");
+                        stringPlus.AppendSpaceLine(3, "}");
+                        break;
+                }
+                #endregion
+
+            }
+
+
+            stringPlus.AppendSpaceLine(3, "strSql.Append(whereSql);");
+      
+           // stringPlus.AppendSpaceLine(3, "string pageSqlStr = \"select * from ( \" + strSql.ToString() + \" ) as Temp_PageData where Temp_PageData.RID BETWEEN {0} AND {1}\";");
+           // stringPlus.AppendSpaceLine(3, "pageSqlStr = string.Format(pageSqlStr, (model.pagesize * (model.pageindex - 1) + 1).ToString(), (model.pagesize * model.pageindex).ToString());");
+            stringPlus.AppendSpaceLine(3, "using (IDbConnection conn = DapperHelper.OpenConnection())");
+            stringPlus.AppendSpaceLine(3, "{");
+            stringPlus.AppendSpaceLine(4, "list = conn.Query <" + ModelSpace + ">(strSql.ToString(), model)?.ToList();");
+ 
+            stringPlus.AppendSpaceLine(3, "}");
+            stringPlus.AppendSpaceLine(3, "return list;");
+            stringPlus.AppendSpaceLine(2, "}");
+
+            return stringPlus.Value;
+        }
         #endregion//数据层
 
 
