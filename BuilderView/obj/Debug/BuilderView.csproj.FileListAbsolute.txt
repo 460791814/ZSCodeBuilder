@@ -20,3 +20,14 @@ D:\WB\ZSCodeBuilder\BuilderView\bin\Debug\CmConfig.pdb
 D:\WB\ZSCodeBuilder\BuilderView\obj\Debug\BuilderView.csprojResolveAssemblyReference.cache
 D:\WB\ZSCodeBuilder\BuilderView\obj\Debug\BuilderView.dll
 D:\WB\ZSCodeBuilder\BuilderView\obj\Debug\BuilderView.pdb
+C:\Users\Administrator\Documents\GitHub\ZSCodeBuilder\BuilderView\bin\Debug\BuilderView.dll
+C:\Users\Administrator\Documents\GitHub\ZSCodeBuilder\BuilderView\bin\Debug\BuilderView.pdb
+C:\Users\Administrator\Documents\GitHub\ZSCodeBuilder\BuilderView\bin\Debug\CodeHelper.dll
+C:\Users\Administrator\Documents\GitHub\ZSCodeBuilder\BuilderView\bin\Debug\Utility.dll
+C:\Users\Administrator\Documents\GitHub\ZSCodeBuilder\BuilderView\bin\Debug\CmConfig.dll
+C:\Users\Administrator\Documents\GitHub\ZSCodeBuilder\BuilderView\bin\Debug\CodeHelper.pdb
+C:\Users\Administrator\Documents\GitHub\ZSCodeBuilder\BuilderView\bin\Debug\Utility.pdb
+C:\Users\Administrator\Documents\GitHub\ZSCodeBuilder\BuilderView\bin\Debug\CmConfig.pdb
+C:\Users\Administrator\Documents\GitHub\ZSCodeBuilder\BuilderView\obj\Debug\BuilderView.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Documents\GitHub\ZSCodeBuilder\BuilderView\obj\Debug\BuilderView.dll
+C:\Users\Administrator\Documents\GitHub\ZSCodeBuilder\BuilderView\obj\Debug\BuilderView.pdb

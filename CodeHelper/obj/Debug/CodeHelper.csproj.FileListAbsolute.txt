@@ -16,3 +16,12 @@ D:\WB\ZSCodeBuilder\CodeHelper\bin\Debug\Utility.pdb
 D:\WB\ZSCodeBuilder\CodeHelper\obj\Debug\CodeHelper.csprojResolveAssemblyReference.cache
 D:\WB\ZSCodeBuilder\CodeHelper\obj\Debug\CodeHelper.dll
 D:\WB\ZSCodeBuilder\CodeHelper\obj\Debug\CodeHelper.pdb
+C:\Users\Administrator\Documents\GitHub\ZSCodeBuilder\CodeHelper\bin\Debug\CodeHelper.dll
+C:\Users\Administrator\Documents\GitHub\ZSCodeBuilder\CodeHelper\bin\Debug\CodeHelper.pdb
+C:\Users\Administrator\Documents\GitHub\ZSCodeBuilder\CodeHelper\bin\Debug\CmConfig.dll
+C:\Users\Administrator\Documents\GitHub\ZSCodeBuilder\CodeHelper\bin\Debug\Utility.dll
+C:\Users\Administrator\Documents\GitHub\ZSCodeBuilder\CodeHelper\bin\Debug\CmConfig.pdb
+C:\Users\Administrator\Documents\GitHub\ZSCodeBuilder\CodeHelper\bin\Debug\Utility.pdb
+C:\Users\Administrator\Documents\GitHub\ZSCodeBuilder\CodeHelper\obj\Debug\CodeHelper.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Documents\GitHub\ZSCodeBuilder\CodeHelper\obj\Debug\CodeHelper.dll
+C:\Users\Administrator\Documents\GitHub\ZSCodeBuilder\CodeHelper\obj\Debug\CodeHelper.pdb

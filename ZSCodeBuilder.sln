@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26430.14
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZSCodeBuilder", "ZSCodeBuilder\ZSCodeBuilder.csproj", "{BE4C483B-3B47-430A-893A-507787082B38}"
 EndProject
@@ -26,6 +26,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDBO", "IDBO\IDBO.csproj", "{313D5803-65C5-4251-8C4E-026E5F109C8A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility", "Utility\Utility.csproj", "{03F58368-720A-4A1F-AA7E-675AE597E460}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{1ACB5434-46E7-48C3-88FC-079DE43E2488}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -81,6 +83,10 @@ Global
 		{03F58368-720A-4A1F-AA7E-675AE597E460}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03F58368-720A-4A1F-AA7E-675AE597E460}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03F58368-720A-4A1F-AA7E-675AE597E460}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1ACB5434-46E7-48C3-88FC-079DE43E2488}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1ACB5434-46E7-48C3-88FC-079DE43E2488}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1ACB5434-46E7-48C3-88FC-079DE43E2488}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1ACB5434-46E7-48C3-88FC-079DE43E2488}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
