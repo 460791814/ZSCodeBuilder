@@ -2,3 +2,7 @@ C:\Users\Administrator\Documents\GitHub\ZSCodeBuilder\Model\bin\Debug\Model.dll
 C:\Users\Administrator\Documents\GitHub\ZSCodeBuilder\Model\bin\Debug\Model.pdb
 C:\Users\Administrator\Documents\GitHub\ZSCodeBuilder\Model\obj\Debug\Model.dll
 C:\Users\Administrator\Documents\GitHub\ZSCodeBuilder\Model\obj\Debug\Model.pdb
+D:\WB\ZSCodeBuilder\Model\bin\Debug\Model.dll
+D:\WB\ZSCodeBuilder\Model\bin\Debug\Model.pdb
+D:\WB\ZSCodeBuilder\Model\obj\Debug\Model.dll
+D:\WB\ZSCodeBuilder\Model\obj\Debug\Model.pdb

@@ -160,3 +160,5 @@ C:\Users\Administrator\Documents\GitHub\ZSCodeBuilder\ZSCodeBuilder\obj\Debug\ZS
 C:\Users\Administrator\Documents\GitHub\ZSCodeBuilder\ZSCodeBuilder\obj\Debug\ZSCodeBuilder.pdb
 C:\Users\Administrator\Documents\GitHub\ZSCodeBuilder\ZSCodeBuilder\bin\Model.dll
 C:\Users\Administrator\Documents\GitHub\ZSCodeBuilder\ZSCodeBuilder\bin\Model.pdb
+D:\WB\ZSCodeBuilder\ZSCodeBuilder\bin\Model.dll
+D:\WB\ZSCodeBuilder\ZSCodeBuilder\bin\Model.pdb

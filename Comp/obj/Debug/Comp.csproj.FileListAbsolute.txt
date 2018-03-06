@@ -36,3 +36,4 @@ C:\Users\Administrator\Documents\GitHub\ZSCodeBuilder\Comp\bin\Debug\Newtonsoft.
 C:\Users\Administrator\Documents\GitHub\ZSCodeBuilder\Comp\bin\Debug\NPOI.xml
 C:\Users\Administrator\Documents\GitHub\ZSCodeBuilder\Comp\obj\Debug\Comp.dll
 C:\Users\Administrator\Documents\GitHub\ZSCodeBuilder\Comp\obj\Debug\Comp.pdb
+D:\WB\ZSCodeBuilder\Comp\obj\Debug\Comp.csprojResolveAssemblyReference.cache
